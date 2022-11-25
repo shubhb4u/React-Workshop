@@ -11,6 +11,23 @@ const App = () => {
   const handleSubmit = (e) => {
 
     e.preventDefault();
+
+    if(editId){
+
+      const editTodo = todos.find((i) => i.id === editId);
+      const updatedTodos = todos.map((t) => 
+        t.id === editTodo.id ? 
+        (t = {id:t.id, todo}): 
+        {id:t.id , todo : t.todo})
+
+      setTodos(updatedTodos);
+      setEditId(0); //We are no longer in edit mode
+      setTodo(""); //Make the input box empty
+      return; // Because we dont want to execute the next steps after this.
+
+    }
+
+
     if(todo !== ""){
 
       setTodos([{id:`${todo}-${Date.now()}`, todo},...todos])
